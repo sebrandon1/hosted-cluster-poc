@@ -1,6 +1,6 @@
 #/bin/bash
 
-set -e
+set -ex
 
 source config-defaults.sh
 
@@ -140,7 +140,7 @@ generate_client_kubeconfig "root-ca" "service-admin" "system:admin" "system:mast
 
 # kube-controller-manager
 generate_client_kubeconfig "root-ca" "kube-controller-manager" "system:admin" "system:masters" "kube-apiserver"
-if [ ! -e "service-account-key.pem" ]; then 
+if [ ! -e "service-account-key.pem" ]; then
   openssl genrsa -out service-account-key.pem 2048
   openssl rsa -in service-account-key.pem -pubout > service-account.pem
 fi

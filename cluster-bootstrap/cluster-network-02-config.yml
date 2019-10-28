@@ -9,7 +9,11 @@ spec:
     hostPrefix: 23
   externalIP:
     policy: {}
+<<<<<<< HEAD
   networkType: ${NETWORK_TYPE}
+=======
+  networkType: Calico
+>>>>>>> Tigera Operator POC
   serviceNetwork:
   - ${SERVICE_NETWORK_CIDR}
 status: {}

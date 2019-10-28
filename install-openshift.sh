@@ -1,7 +1,13 @@
 #!/bin/bash
 
+<<<<<<< HEAD
 source config-defaults.sh
 source lib/common.sh
+=======
+set -x
+
+source config.sh
+>>>>>>> Tigera Operator POC
 
 export API_NODEPORT="${API_NODEPORT:-$EXTERNAL_API_PORT}"
 
@@ -29,7 +35,11 @@ echo $KUBEADMIN_PASSWORD > kubeadmin-password
 oc create secret generic kubeadmin -n kube-system --from-literal=kubeadmin="$(htpasswd -bnBC 10 "" "${KUBEADMIN_PASSWORD}" | tr -d ':\n')" -oyaml --dry-run > manifests/user/kubeadmin-secret.yaml
 oc create secret generic pull-secret --from-file=.dockerconfigjson=pull-secret --type=kubernetes.io/dockerconfigjson -oyaml --dry-run > manifests/managed/pull-secret.yaml
 oc create secret generic pull-secret -n openshift-config --from-file=.dockerconfigjson=pull-secret --type=kubernetes.io/dockerconfigjson -oyaml --dry-run > manifests/user/00-pull-secret.yaml
+<<<<<<< HEAD
 for component in etcd kube-apiserver kube-controller-manager kube-scheduler cluster-bootstrap openshift-apiserver openshift-controller-manager openvpn cluster-version-operator auto-approver ca-operator user-manifests-bootstrapper; do
+=======
+for component in etcd kube-apiserver kube-controller-manager kube-scheduler cluster-bootstrap openshift-apiserver openshift-controller-manager cluster-version-operator auto-approver ca-operator route-setter tigera-operator user-manifests-bootstrapper; do
+>>>>>>> Tigera Operator POC
   pushd ${component} >/dev/null
   ./render.sh >/dev/null
   popd >/dev/null
